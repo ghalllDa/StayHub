@@ -99,10 +99,7 @@
                                                 <form method="POST"
                                                       action="{{ route('admin.bookings.reject', $booking->id) }}">
                                                     @csrf
-                                                    <button
-                                                        class="px-4 py-1.5 text-xs font-semibold bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
-                                                        Tolak
-                                                    </button>
+                                                   
                                                 </form>
                                             </div>
                                         @else
