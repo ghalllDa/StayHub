@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
     /*
     | HOTEL USER
     */
-    Route::get('/hotels/{id}', [HotelController::class, 'show'])->name('hotels.show');
+    Route::get('/hotels/{id}', [HotelController::class, 'show'])->name('user.hotels.show');
 
     /*
     | BOOKING
@@ -59,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/hotels/{hotel}/bookmark', [BookmarkController::class, 'destroy'])->name('bookmark.destroy');
 
     /*
-    | RIWAYAT PESANAN (FIXED)
+    | RIWAYAT PESANAN
     */
     Route::get('/riwayat-pesanan', [OrderHistoryController::class, 'index'])
         ->name('user.order-history');
@@ -69,13 +69,14 @@ Route::middleware(['auth'])->group(function () {
     */
     Route::get('/tickets', [UserTicketController::class, 'index'])
         ->name('tickets.index');
-
     Route::get('/tickets/{ticket}', [UserTicketController::class, 'show'])
         ->name('tickets.show');
 
-
-Route::get('/reviews/{order}/create', [ReviewController::class, 'create'])
-    ->name('reviews.create');
+    /*
+    | REVIEW
+    */
+    Route::get('/reviews/{order}/create', [ReviewController::class, 'create'])
+        ->name('reviews.create');
 
 });
 
@@ -88,11 +89,30 @@ Route::middleware(['auth', 'role:admin_operasional'])
     ->prefix('admin-operasional')
     ->group(function () {
 
-        Route::resource('hotels', AdminHotelController::class);
-        Route::resource('hotels.rooms', RoomController::class);
+        // Resource dengan nama unik untuk admin
+        Route::resource('hotels', AdminHotelController::class, [
+            'names' => [
+                'index'   => 'admin.hotels.index',
+                'create'  => 'admin.hotels.create',
+                'store'   => 'admin.hotels.store',
+                'show'    => 'admin.hotels.show',
+                'edit'    => 'admin.hotels.edit',
+                'update'  => 'admin.hotels.update',
+                'destroy' => 'admin.hotels.destroy',
+            ]
+        ]);
 
-        Route::get('hotels/{hotel}', [AdminHotelController::class, 'show'])
-            ->name('admin.hotels.show');
+        Route::resource('hotels.rooms', RoomController::class, [
+            'names' => [
+                'index'   => 'admin.hotels.rooms.index',
+                'create'  => 'admin.hotels.rooms.create',
+                'store'   => 'admin.hotels.rooms.store',
+                'show'    => 'admin.hotels.rooms.show',
+                'edit'    => 'admin.hotels.rooms.edit',
+                'update'  => 'admin.hotels.rooms.update',
+                'destroy' => 'admin.hotels.rooms.destroy',
+            ]
+        ]);
 
         Route::delete('hotels/images/{image}', [HotelImageController::class, 'destroy'])
             ->name('admin.hotels.images.destroy');
@@ -132,12 +152,12 @@ Route::middleware(['auth', 'role:admin_operasional'])
 
 /*
 |--------------------------------------------------------------------------
-| Hotel Search
+| Hotel Search (User)
 |--------------------------------------------------------------------------
 */
 Route::get('/hotels', function () {
     return view('penginapan.index');
-})->name('hotels.index');
+})->name('user.hotels.index');
 
 Route::get('/hotels-nearby', [HotelController::class, 'nearby']);
 
