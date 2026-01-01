@@ -1,33 +1,37 @@
 <x-app-layout>
-    <div class="max-w-5xl mx-auto px-6 py-8">
+    <div class="max-w-5xl mx-auto px-6 py-12">
 
         <!-- TOMBOL KEMBALI -->
-        <a href="{{ route('hotels.show', $room->hotel->id) }}" class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full
-          bg-white shadow-sm border border-gray-200
-          text-sm font-semibold text-gray-700
-          hover:bg-gray-50 hover:text-orange-600
-          transition">
+        <a href="{{ route('hotels.show', $room->hotel->id) }}"
+           class="inline-flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full
+                  bg-white shadow border border-gray-200
+                  text-sm font-semibold text-gray-700
+                  hover:bg-orange-50 hover:text-orange-600
+                  transition">
 
-
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+                 viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
             Kembali
         </a>
 
         <!-- JUDUL -->
-        <h1 class="text-2xl font-bold text-gray-800 mb-6">
+        <h1 class="text-3xl font-extrabold text-gray-800 mb-10">
             Booking Kamar
         </h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
             <!-- FORM BOOKING -->
-            <div class="md:col-span-2 bg-white rounded-lg shadow p-6">
-                <h2 class="text-lg font-bold mb-4">Detail Pemesanan</h2>
+            <div class="md:col-span-2 bg-white rounded-2xl shadow-lg p-8">
+                <h2 class="text-xl font-bold mb-6 text-gray-800">
+                    Detail Pemesanan
+                </h2>
 
-                <form action="{{ route('booking.createPayment') }}" method="POST" class="space-y-4">
+                <form action="{{ route('booking.createPayment') }}"
+                      method="POST" class="space-y-5">
                     @csrf
                     <input type="hidden" name="room_id" value="{{ $room->id }}">
 
@@ -36,12 +40,13 @@
                         <label class="block text-sm font-semibold text-gray-700">
                             Tanggal Check-in
                         </label>
-                        <input type="date" name="check_in" class="w-full mt-1 border rounded-lg px-3 py-2" required
-                            min="{{ date('Y-m-d') }}">
+                        <input type="date" name="check_in"
+                               class="w-full mt-1 border border-gray-300
+                                      rounded-xl px-4 py-2.5
+                                      focus:ring-orange-500 focus:border-orange-500"
+                               required min="{{ date('Y-m-d') }}">
                         @error('check_in')
-                            <p class="text-sm text-red-600 mt-1">
-                                {{ $message }}
-                            </p>
+                            <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -50,12 +55,14 @@
                         <label class="block text-sm font-semibold text-gray-700">
                             Tanggal Check-out
                         </label>
-                        <input type="date" name="check_out" class="w-full mt-1 border rounded-lg px-3 py-2" required
-                            min="{{ date('Y-m-d', strtotime('+1 day')) }}">
+                        <input type="date" name="check_out"
+                               class="w-full mt-1 border border-gray-300
+                                      rounded-xl px-4 py-2.5
+                                      focus:ring-orange-500 focus:border-orange-500"
+                               required
+                               min="{{ date('Y-m-d', strtotime('+1 day')) }}">
                         @error('check_out')
-                            <p class="text-sm text-red-600 mt-1">
-                                {{ $message }}
-                            </p>
+                            <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -64,21 +71,24 @@
                         <label class="block text-sm font-semibold text-gray-700">
                             Jumlah Tamu
                         </label>
-                        <input type="number" name="jumlah_tamu" min="1" class="w-full mt-1 border rounded-lg px-3 py-2"
-                            required>
+                        <input type="number" name="jumlah_tamu" min="1"
+                               class="w-full mt-1 border border-gray-300
+                                      rounded-xl px-4 py-2.5"
+                               required>
                         @error('jumlah_tamu')
-                            <p class="text-sm text-red-600 mt-1">
-                                {{ $message }}
-                            </p>
+                            <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <!-- NAMA PEMESAN -->
+                    <!-- NAMA -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700">
                             Nama Pemesan
                         </label>
-                        <input type="text" name="nama_pemesan" class="w-full mt-1 border rounded-lg px-3 py-2" required>
+                        <input type="text" name="nama_pemesan"
+                               class="w-full mt-1 border border-gray-300
+                                      rounded-xl px-4 py-2.5"
+                               required>
                     </div>
 
                     <!-- NO HP -->
@@ -86,7 +96,10 @@
                         <label class="block text-sm font-semibold text-gray-700">
                             No. HP
                         </label>
-                        <input type="text" name="no_hp" class="w-full mt-1 border rounded-lg px-3 py-2" required>
+                        <input type="text" name="no_hp"
+                               class="w-full mt-1 border border-gray-300
+                                      rounded-xl px-4 py-2.5"
+                               required>
                     </div>
 
                     <!-- CATATAN -->
@@ -94,46 +107,44 @@
                         <label class="block text-sm font-semibold text-gray-700">
                             Catatan (opsional)
                         </label>
-                        <textarea name="catatan" class="w-full mt-1 border rounded-lg px-3 py-2"></textarea>
+                        <textarea name="catatan"
+                                  class="w-full mt-1 border border-gray-300
+                                         rounded-xl px-4 py-2.5"></textarea>
                     </div>
 
                     <!-- SUBMIT -->
                     <button type="submit"
-                        class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-bold transition">
+                            class="w-full bg-orange-500 hover:bg-orange-600
+                                   text-white py-3 rounded-xl
+                                   font-bold shadow-lg transition">
                         Konfirmasi & Lanjut ke Pembayaran
                     </button>
                 </form>
             </div>
 
-            <!-- RINGKASAN KAMAR -->
-            <div class="bg-white rounded-lg shadow p-6 h-fit">
+            <!-- RINGKASAN -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 h-fit">
                 <h2 class="text-lg font-bold mb-4">Ringkasan Kamar</h2>
 
-                <!-- FOTO KAMAR -->
-                <div class="w-full md:w-50 h-35 flex-shrink-0">
-                    @if($room->gambar)
-                        <img src="{{ asset('storage/' . $room->gambar) }}" class="w-full h-40 object-cover rounded-lg mb-3">
-                    @endif
-                </div>
+                @if($room->gambar)
+                    <img src="{{ asset('storage/' . $room->gambar) }}"
+                         class="w-full h-44 object-cover rounded-xl mb-4">
+                @endif
 
-
-                <!-- HOTEL -->
                 <p class="font-semibold text-gray-800">
                     {{ $room->hotel->nama_hotel }}
                 </p>
-                <p class="text-sm text-gray-500 mb-2">
+                <p class="text-sm text-gray-500 mb-3">
                     {{ $room->hotel->lokasi }}
                 </p>
 
-                <hr class="my-3">
+                <hr class="my-4">
 
-                <!-- KAMAR -->
                 <p class="font-semibold text-gray-800">
                     {{ $room->nama_kamar }}
                 </p>
 
-                <!-- FASILITAS -->
-                <ul class="text-sm text-gray-600 list-disc list-inside mt-1">
+                <ul class="text-sm text-gray-600 list-disc list-inside mt-2">
                     @foreach ($room->fasilitas as $f)
                         <li>{{ $f }}</li>
                     @endforeach
@@ -143,15 +154,140 @@
                     Kapasitas: {{ $room->kapasitas }} orang
                 </p>
 
-                <hr class="my-3">
+                <hr class="my-4">
 
-                <!-- HARGA -->
                 <p class="text-sm text-gray-500">Harga / malam</p>
-                <p class="text-xl font-bold text-orange-600">
+                <p class="text-2xl font-extrabold text-orange-600">
                     Rp {{ number_format($room->harga, 0, ',', '.') }}
                 </p>
             </div>
 
         </div>
     </div>
+
+    <!-- ================= VALUE SECTION ================= -->
+    <section class="bg-white py-20 mt-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl font-bold text-blue-700 mb-3">
+                    Kenapa Memilih HotelHub?
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Kami hadir untuk memberikan pengalaman booking hotel
+                    yang lebih mudah, aman, dan nyaman untuk semua orang.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:-translate-y-1 transition">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h4 class="font-semibold text-lg mb-2">Proses Cepat</h4>
+                    <p class="text-gray-600 text-sm">
+                        Booking hotel hanya dalam beberapa langkah.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:-translate-y-1 transition">
+                    <div class="text-4xl mb-4">🔒</div>
+                    <h4 class="font-semibold text-lg mb-2">Aman & Terpercaya</h4>
+                    <p class="text-gray-600 text-sm">
+                        Data dan transaksi kamu terlindungi.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:-translate-y-1 transition">
+                    <div class="text-4xl mb-4">🏨</div>
+                    <h4 class="font-semibold text-lg mb-2">Pilihan Lengkap</h4>
+                    <p class="text-gray-600 text-sm">
+                        Ribuan hotel di seluruh Indonesia.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-white border-t mt-24">
+        <div class="max-w-7xl mx-auto px-6 py-16
+                    grid grid-cols-1 md:grid-cols-3 gap-12 text-gray-600">
+
+            <!-- LEFT -->
+            <div>
+                <h2 class="text-2xl font-bold text-blue-700 mb-4">
+                    HotelHub
+                </h2>
+
+                <p class="leading-relaxed">
+                    HotelHub adalah platform booking hotel yang membantu kamu
+                    menemukan penginapan terbaik dengan proses cepat, aman,
+                    dan nyaman di seluruh Indonesia.
+                </p>
+
+                <p class="italic text-sm text-gray-400 mt-4">
+                    Making your stay easier, one booking at a time.
+                </p>
+
+                <button class="mt-6 px-6 py-2 text-blue-700 border border-blue-200
+                               rounded-xl hover:bg-blue-50 transition">
+                    Tentang Tim Kami
+                </button>
+            </div>
+
+            <!-- MIDDLE -->
+            <div>
+                <h4 class="font-semibold text-gray-800 mb-4">
+                    Layanan
+                </h4>
+
+                <ul class="space-y-2">
+                    <li class="hover:text-blue-600 transition cursor-pointer">
+                        Booking Hotel
+                    </li>
+                    <li class="hover:text-blue-600 transition cursor-pointer">
+                        Promo & Diskon
+                    </li>
+                    <li class="hover:text-blue-600 transition cursor-pointer">
+                        Bantuan Pelanggan
+                    </li>
+                </ul>
+            </div>
+
+            <!-- RIGHT -->
+            <div>
+                <h4 class="font-semibold text-gray-800 mb-4">
+                    Help Center
+                </h4>
+
+                <div class="space-y-3">
+                    <p>📧 support@hotelhub.id</p>
+                    <p>📞 +62 587-6655-4420</p>
+                    <p>📍 Bandung, Indonesia</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM -->
+        <div class="border-t">
+            <div class="max-w-7xl mx-auto px-6 py-6
+                        flex flex-col md:flex-row
+                        justify-between items-center
+                        text-sm text-gray-500">
+
+                <p>© 2026 HotelHub. All rights reserved.</p>
+
+                <div class="flex gap-6 mt-3 md:mt-0">
+                    <a href="#" class="hover:text-blue-600 transition">
+                        Privacy Policy
+                    </a>
+                    <a href="#" class="hover:text-blue-600 transition">
+                        Terms of Service
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FOOTER (TIDAK DIUBAH ISI) -->
+    <!-- footer kamu tetap sama persis -->
 </x-app-layout>
