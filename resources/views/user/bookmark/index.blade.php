@@ -112,4 +112,127 @@
             color: #ef4444;
         }
     </style>
+
+    <!-- ================= VALUE SECTION ================= -->
+    <section class="bg-white py-20 mt-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl font-bold text-blue-700 mb-3">
+                    Kenapa Memilih HotelHub?
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Kami hadir untuk memberikan pengalaman booking hotel
+                    yang lebih mudah, aman, dan nyaman untuk semua orang.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:-translate-y-1 transition">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h4 class="font-semibold text-lg mb-2">Proses Cepat</h4>
+                    <p class="text-gray-600 text-sm">
+                        Booking hotel hanya dalam beberapa langkah.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:-translate-y-1 transition">
+                    <div class="text-4xl mb-4">🔒</div>
+                    <h4 class="font-semibold text-lg mb-2">Aman & Terpercaya</h4>
+                    <p class="text-gray-600 text-sm">
+                        Data dan transaksi kamu terlindungi.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:-translate-y-1 transition">
+                    <div class="text-4xl mb-4">🏨</div>
+                    <h4 class="font-semibold text-lg mb-2">Pilihan Lengkap</h4>
+                    <p class="text-gray-600 text-sm">
+                        Ribuan hotel di seluruh Indonesia.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-white border-t mt-24">
+        <div class="max-w-7xl mx-auto px-6 py-16
+                    grid grid-cols-1 md:grid-cols-3 gap-12 text-gray-600">
+
+            <!-- LEFT -->
+            <div>
+                <h2 class="text-2xl font-bold text-blue-700 mb-4">
+                    HotelHub
+                </h2>
+
+                <p class="leading-relaxed">
+                    HotelHub adalah platform booking hotel yang membantu kamu
+                    menemukan penginapan terbaik dengan proses cepat, aman,
+                    dan nyaman di seluruh Indonesia.
+                </p>
+
+                <p class="italic text-sm text-gray-400 mt-4">
+                    Making your stay easier, one booking at a time.
+                </p>
+
+                <button class="mt-6 px-6 py-2 text-blue-700 border border-blue-200
+                               rounded-xl hover:bg-blue-50 transition">
+                    Tentang Tim Kami
+                </button>
+            </div>
+
+            <!-- MIDDLE -->
+            <div>
+                <h4 class="font-semibold text-gray-800 mb-4">
+                    Layanan
+                </h4>
+
+                <ul class="space-y-2">
+                    <li class="hover:text-blue-600 transition cursor-pointer">
+                        Booking Hotel
+                    </li>
+                    <li class="hover:text-blue-600 transition cursor-pointer">
+                        Promo & Diskon
+                    </li>
+                    <li class="hover:text-blue-600 transition cursor-pointer">
+                        Bantuan Pelanggan
+                    </li>
+                </ul>
+            </div>
+
+            <!-- RIGHT -->
+            <div>
+                <h4 class="font-semibold text-gray-800 mb-4">
+                    Help Center
+                </h4>
+
+                <div class="space-y-3">
+                    <p>📧 support@hotelhub.id</p>
+                    <p>📞 +62 587-6655-4420</p>
+                    <p>📍 Bandung, Indonesia</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM -->
+        <div class="border-t">
+            <div class="max-w-7xl mx-auto px-6 py-6
+                        flex flex-col md:flex-row
+                        justify-between items-center
+                        text-sm text-gray-500">
+
+                <p>© 2026 HotelHub. All rights reserved.</p>
+
+                <div class="flex gap-6 mt-3 md:mt-0">
+                    <a href="#" class="hover:text-blue-600 transition">
+                        Privacy Policy
+                    </a>
+                    <a href="#" class="hover:text-blue-600 transition">
+                        Terms of Service
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </x-app-layout>
