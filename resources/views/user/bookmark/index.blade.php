@@ -8,12 +8,6 @@
     <div class="py-12 bg-blue-50 min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <div class="mb-6">
-                <a href="{{ route('dashboard') }}"
-                   class="text-blue-600 hover:text-blue-800 text-sm">
-                    ← Kembali ke Dashboard
-                </a>
-            </div>
 
             @if($hotels->count() === 0)
                 <div class="bg-white rounded-lg shadow p-8 text-center text-gray-500">
