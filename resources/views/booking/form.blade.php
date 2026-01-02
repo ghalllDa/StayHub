@@ -92,51 +92,53 @@
                 </div>
 
                 <!-- RINGKASAN -->
-                <div class="bg-white rounded-lg shadow p-6 h-fit">
-                    <h2 class="text-lg font-semibold mb-4">
-                        Ringkasan Kamar
-                    </h2>
+<div class="bg-white rounded-lg shadow p-6 h-fit">
+    <h2 class="text-lg font-semibold mb-4">
+        Ringkasan Kamar
+    </h2>
 
-                    @if($room->gambar)
-                        <img src="{{ asset('storage/' . $room->gambar) }}"
-                             class="w-full h-40 object-cover rounded mb-4">
-                    @endif
+    @php
+        $roomImg = $room->gambar && file_exists(public_path('images/' . $room->gambar))
+                   ? asset('images/' . $room->gambar)
+                   : asset('images/no-image.png');
+    @endphp
 
-                    <p class="font-semibold text-gray-800">
-                        {{ $room->hotel->nama_hotel }}
-                    </p>
+    <img src="{{ $roomImg }}"
+         class="w-full h-40 object-cover rounded mb-4"
+         alt="Foto {{ $room->nama_kamar }}">
 
-                    <p class="text-sm text-gray-500">
-                        {{ $room->hotel->lokasi }}
-                    </p>
+    <p class="font-semibold text-gray-800">
+        {{ $room->hotel->nama_hotel }}
+    </p>
 
-                    <hr class="my-4">
+    <p class="text-sm text-gray-500">
+        {{ $room->hotel->lokasi }}
+    </p>
 
-                    <p class="font-medium text-gray-800">
-                        {{ $room->nama_kamar }}
-                    </p>
+    <hr class="my-4">
 
-                    <ul class="text-sm text-gray-600 list-disc list-inside mt-2">
-                        @foreach ($room->fasilitas as $f)
-                            <li>{{ $f }}</li>
-                        @endforeach
-                    </ul>
+    <p class="font-medium text-gray-800">
+        {{ $room->nama_kamar }}
+    </p>
 
-                    <p class="text-sm text-gray-500 mt-2">
-                        Kapasitas: {{ $room->kapasitas }} orang
-                    </p>
+    <ul class="text-sm text-gray-600 list-disc list-inside mt-2">
+        @foreach ($room->fasilitas as $f)
+            <li>{{ $f }}</li>
+        @endforeach
+    </ul>
 
-                    <hr class="my-4">
+    <p class="text-sm text-gray-500 mt-2">
+        Kapasitas: {{ $room->capacity }} orang
+    </p>
 
-                    <p class="text-sm text-gray-500">Harga / malam</p>
-                    <p class="text-2xl font-bold text-orange-600">
-                        Rp {{ number_format($room->harga, 0, ',', '.') }}
-                    </p>
-                </div>
+    <hr class="my-4">
 
-            </div>
-        </div>
-    </div>
+    <p class="text-sm text-gray-500">Harga / malam</p>
+    <p class="text-2xl font-bold text-orange-600">
+        Rp {{ number_format($room->harga, 0, ',', '.') }}
+    </p>
+</div>
+
 
  
 
