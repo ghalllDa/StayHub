@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class AdminHotelController extends Controller
 {
@@ -35,15 +36,17 @@ class AdminHotelController extends Controller
 
         $hotel = Hotel::create($data);
 
-        // ✅ SIMPAN GAMBAR KE public/uploads
+        // ✅ UPLOAD KE CLOUDINARY (TANPA NGUBAH FITUR)
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
 
-                $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('uploads/hotels'), $filename);
+                $upload = Cloudinary::upload(
+                    $image->getRealPath(),
+                    ['folder' => 'hotels']
+                );
 
                 $hotel->images()->create([
-                    'path' => 'uploads/hotels/' . $filename
+                    'path' => $upload->getSecurePath()
                 ]);
             }
         }
@@ -78,11 +81,13 @@ class AdminHotelController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
 
-                $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('uploads/hotels'), $filename);
+                $upload = Cloudinary::upload(
+                    $image->getRealPath(),
+                    ['folder' => 'hotels']
+                );
 
                 $hotel->images()->create([
-                    'path' => 'uploads/hotels/' . $filename
+                    'path' => $upload->getSecurePath()
                 ]);
             }
         }
@@ -95,13 +100,7 @@ class AdminHotelController extends Controller
     public function destroy(Hotel $hotel)
     {
         foreach ($hotel->images as $img) {
-            $fullPath = public_path($img->path);
-
-            if (file_exists($fullPath)) {
-                unlink($fullPath);
-            }
-
-            $img->delete();
+            $img->delete(); // Cloudinary biarin dulu (opsional)
         }
 
         $hotel->delete();
