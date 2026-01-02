@@ -52,17 +52,20 @@
                 @endphp
 
                 {{-- IMAGE --}}
-                <div class="hotel-image relative h-52 overflow-hidden">
+<div class="hotel-image relative h-52 overflow-hidden">
 
-                    @if($gambar)
-                        <img src="{{ asset($gambar->path) }}"
-                             class="w-full h-full object-cover">
-                    @else
-                        <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300
-                                    flex items-center justify-center text-gray-500 italic text-sm">
-                            No Image
-                        </div>
-                    @endif
+    @if($gambar)
+        <img src="{{ file_exists(public_path('images/' . $gambar->path)) 
+                     ? asset('images/' . $gambar->path) 
+                     : asset('storage/' . $gambar->path) }}"
+             class="w-full h-full object-cover"
+             alt="{{ $hotel->nama_hotel }}">
+    @else
+        <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300
+                    flex items-center justify-center text-gray-500 italic text-sm">
+            No Image
+        </div>
+    @endif
 
                     {{-- OVERLAY --}}
                     <div class="absolute inset-0 bg-gradient-to-t
