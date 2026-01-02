@@ -109,7 +109,7 @@
                                 <div class="flex justify-center gap-2">
 
                                     {{-- EDIT --}}
-                                    <a href="{{ route('hotels.edit', $hotel->id) }}"
+                                    <a href="{{ route('admin.hotels.edit', $hotel->id) }}"
                                        class="px-4 py-1.5 rounded-lg text-sm
                                               bg-blue-100 text-blue-700
                                               hover:bg-blue-600 hover:text-white
