@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
 
 class AdminHotelController extends Controller
 {
@@ -24,38 +26,45 @@ class AdminHotelController extends Controller
     {
         $data = $request->validate([
             'nama_hotel' => 'required|string',
-            'lokasi'     => 'required|string',
-            'deskripsi'  => 'required|string',
-            'latitude'   => 'required',
-            'longitude'  => 'required',
-            'harga'      => 'required|integer',
-            'fasilitas'  => 'required|string',
-            'stars'      => 'required|integer|min:1|max:5',
-            'images.*'   => 'image|mimes:jpg,jpeg,png|max:2048',
+            'lokasi' => 'required|string',
+            'deskripsi' => 'required|string',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'harga' => 'required|integer',
+            'fasilitas' => 'required|string',
+            'stars' => 'required|integer|min:1|max:5',
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         // SIMPAN HOTEL (TANPA GAMBAR)
         $hotel = Hotel::create([
             'nama_hotel' => $data['nama_hotel'],
-            'lokasi'     => $data['lokasi'],
-            'deskripsi'  => $data['deskripsi'],
-            'latitude'   => $data['latitude'],
-            'longitude'  => $data['longitude'],
-            'harga'      => $data['harga'],
-            'fasilitas'  => $data['fasilitas'],
-            'stars'      => $data['stars'],
+            'lokasi' => $data['lokasi'],
+            'deskripsi' => $data['deskripsi'],
+            'latitude' => $data['latitude'],
+            'longitude' => $data['longitude'],
+            'harga' => $data['harga'],
+            'fasilitas' => $data['fasilitas'],
+            'stars' => $data['stars'],
         ]);
 
         // SIMPAN MULTI IMAGE
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('hotels', 'public');
+
+                $uploaded = Cloudinary::upload(
+                    $image->getRealPath(),
+                    [
+                        'folder' => 'hotels'
+                    ]
+                );
 
                 $hotel->images()->create([
-                    'path' => $path
+                    'path' => $uploaded->getSecurePath(), // FULL HTTPS URL
                 ]);
             }
         }
+
 
         return redirect()
             ->route('admin.hotels.index')
@@ -72,34 +81,40 @@ class AdminHotelController extends Controller
     {
         $request->validate([
             'nama_hotel' => 'required|string',
-            'lokasi'     => 'required|string',
-            'deskripsi'  => 'required|string',
-            'harga'      => 'required|numeric',
-            'fasilitas'  => 'required|string',
-            'latitude'   => 'required',
-            'longitude'  => 'required',
-            'images.*'   => 'image|mimes:jpg,jpeg,png|max:2048',
+            'lokasi' => 'required|string',
+            'deskripsi' => 'required|string',
+            'harga' => 'required|numeric',
+            'fasilitas' => 'required|string',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         // UPDATE DATA HOTEL
         $hotel->update([
             'nama_hotel' => $request->nama_hotel,
-            'lokasi'     => $request->lokasi,
-            'deskripsi'  => $request->deskripsi,
-            'harga'      => $request->harga,
-            'fasilitas'  => $request->fasilitas,
-            'latitude'   => $request->latitude,
-            'longitude'  => $request->longitude,
-            'stars'      => $request->stars,
+            'lokasi' => $request->lokasi,
+            'deskripsi' => $request->deskripsi,
+            'harga' => $request->harga,
+            'fasilitas' => $request->fasilitas,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'stars' => $request->stars,
         ]);
 
         // TAMBAH GAMBAR BARU (TIDAK HAPUS YANG LAMA)
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('hotels', 'public');
+
+                $uploaded = Cloudinary::upload(
+                    $image->getRealPath(),
+                    [
+                        'folder' => 'hotels'
+                    ]
+                );
 
                 $hotel->images()->create([
-                    'path' => $path
+                    'path' => $uploaded->getSecurePath(),
                 ]);
             }
         }
