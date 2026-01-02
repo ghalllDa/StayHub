@@ -20,11 +20,11 @@
                 </p>
             </div>
 
-            <a href="{{ route('hotels.create') }}"
-               class="bg-blue-600 hover:bg-blue-700
-                      transition text-white px-5 py-2 rounded-lg shadow">
-                + Tambah Hotel
-            </a>
+            <a href="{{ route('admin.hotels.create') }}"
+   class="bg-blue-600 hover:bg-blue-700 transition text-white px-5 py-2 rounded-lg shadow">
+    + Tambah Hotel
+</a>
+
         </div>
     </div>
 
