@@ -137,7 +137,7 @@
 
                 {{-- ACTION --}}
                 <div class="flex justify-end gap-4 pt-6 border-t">
-                    <a href="{{ route('hotels.index') }}"
+                    <a href="{{ route('admin.hotels.index') }}"
                        class="px-6 py-2.5 rounded-xl bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 transition">
                         Batal
                     </a>
