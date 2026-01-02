@@ -178,20 +178,6 @@
                     </li>
                 </ul>
             </div>
-            <div>
-                <p class="text-xs uppercase tracking-widest text-gray-400 mb-3">
-                    Pemesanan
-                </p>
-                <ul class="space-y-2">
-                    <li>
-                        <a href="{{ route('admin.bookings.index') }}"
-                           class="menu-item {{ request()->routeIs('admin.bookings.*') ? 'active-menu' : '' }}">
-                            📋 Daftar Pesanan
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
             <div class="pt-6 border-t border-white/10 text-xs text-gray-400 text-center">
                 © {{ date('Y') }} Hotel System
             </div>
