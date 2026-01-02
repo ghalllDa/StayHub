@@ -55,7 +55,7 @@
                 <div class="hotel-image relative h-52 overflow-hidden">
 
                     @if($gambar)
-                        <img src="{{ asset('storage/' . $gambar->path) }}"
+                        <img src="{{ asset($gambar->path) }}"
                              class="w-full h-full object-cover">
                     @else
                         <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300
