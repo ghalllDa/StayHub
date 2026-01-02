@@ -58,7 +58,7 @@ class AdminHotelController extends Controller
         }
 
         return redirect()
-            ->route('hotels.index')
+            ->route('admin.hotels.index')
             ->with('success', 'Hotel berhasil ditambahkan!');
     }
 
@@ -105,7 +105,7 @@ class AdminHotelController extends Controller
         }
 
         return redirect()
-            ->route('hotels.index')
+            ->route('admin.hotels.index')
             ->with('success', 'Hotel berhasil diperbarui');
     }
 
@@ -120,7 +120,7 @@ class AdminHotelController extends Controller
         $hotel->delete();
 
         return redirect()
-            ->route('hotels.index')
+            ->route('admin.hotels.index')
             ->with('success', 'Hotel berhasil dihapus!');
     }
 
