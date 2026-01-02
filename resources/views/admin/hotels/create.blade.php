@@ -34,7 +34,7 @@
             @endif
 
             {{-- FORM --}}
-            <form action="{{ route('hotels.store') }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('admin.hotels.store') }}" method="POST" enctype="multipart/form-data"
                   class="bg-white rounded-2xl shadow-xl p-8 space-y-8">
                 @csrf
 

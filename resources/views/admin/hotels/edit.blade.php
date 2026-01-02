@@ -4,7 +4,7 @@
         </a>
 
         {{-- Kembali ke Daftar Hotel --}}
-        <a href="{{ route('hotels.index') }}" class="inline-flex items-center gap-2
+        <a href="{{ route('admin.hotels.index') }}" class="inline-flex items-center gap-2
               bg-blue-600 hover:bg-blue-700
               text-white font-semibold text-sm
               px-5 py-2.5 rounded-lg
@@ -33,7 +33,7 @@
             </div>
         @endif
 
-        <form action="{{ route('hotels.update', $hotel) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.hotels.update', $hotel) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -136,7 +136,7 @@
                     Update
                 </button>
 
-                <a href="{{ route('hotels.index') }}" class="bg-gray-300 px-5 py-2 rounded">
+                <a href="{{ route('admin.hotels.index') }}" class="bg-gray-300 px-5 py-2 rounded">
                     Batal
                 </a>
             </div>
