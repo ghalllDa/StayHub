@@ -136,7 +136,7 @@
 
                     {{-- FORM --}}
                     <form method="POST"
-                          action="{{ route('hotels.rooms.store', $hotel->id) }}"
+                          action="{{ route('admin.hotels.rooms.store', $hotel->id) }}"
                           enctype="multipart/form-data">
                         @csrf
 
