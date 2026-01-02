@@ -9,22 +9,6 @@
                     rounded-3xl shadow-2xl
                     p-8">
 
-            <!-- TOMBOL KEMBALI
-            <a href="{{ route('dashboard') }}"
-               class="inline-flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full
-                      bg-white shadow-sm border border-gray-200
-                      text-sm font-semibold text-gray-700
-                      hover:bg-gray-50 hover:text-orange-600 transition">
-
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
-                     viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-
-                Kembali ke Dashboard
-            </a> -->
-
             <!-- HEADER HOTEL -->
             <div class="mb-4">
     <div class="flex items-center gap-3">
