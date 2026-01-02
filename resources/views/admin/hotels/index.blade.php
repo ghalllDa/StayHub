@@ -97,7 +97,7 @@
                             {{-- GAMBAR --}}
                             <td class="px-6 py-5 text-center">
                                 @if($gambar)
-                                    <img src="{{ asset('storage/' . $gambar->path) }}"
+                                    <img src="{{ asset($gambar->path) }}">
                                          class="w-14 h-14 object-cover rounded-lg shadow mx-auto">
                                 @else
                                     <div class="w-14 h-14 bg-gray-200 rounded-lg mx-auto"></div>

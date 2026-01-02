@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AdminHotelController extends Controller
 {
@@ -34,25 +33,17 @@ class AdminHotelController extends Controller
             'images.*'   => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // SIMPAN HOTEL (TANPA GAMBAR)
-        $hotel = Hotel::create([
-            'nama_hotel' => $data['nama_hotel'],
-            'lokasi'     => $data['lokasi'],
-            'deskripsi'  => $data['deskripsi'],
-            'latitude'   => $data['latitude'],
-            'longitude'  => $data['longitude'],
-            'harga'      => $data['harga'],
-            'fasilitas'  => $data['fasilitas'],
-            'stars'      => $data['stars'],
-        ]);
+        $hotel = Hotel::create($data);
 
-        // SIMPAN MULTI IMAGE
+        // ✅ SIMPAN GAMBAR KE public/uploads
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('hotels', 'public');
+
+                $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/hotels'), $filename);
 
                 $hotel->images()->create([
-                    'path' => $path
+                    'path' => 'uploads/hotels/' . $filename
                 ]);
             }
         }
@@ -78,28 +69,20 @@ class AdminHotelController extends Controller
             'fasilitas'  => 'required|string',
             'latitude'   => 'required',
             'longitude'  => 'required',
+            'stars'      => 'required|integer|min:1|max:5',
             'images.*'   => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // UPDATE DATA HOTEL
-        $hotel->update([
-            'nama_hotel' => $request->nama_hotel,
-            'lokasi'     => $request->lokasi,
-            'deskripsi'  => $request->deskripsi,
-            'harga'      => $request->harga,
-            'fasilitas'  => $request->fasilitas,
-            'latitude'   => $request->latitude,
-            'longitude'  => $request->longitude,
-            'stars'      => $request->stars,
-        ]);
+        $hotel->update($request->except('images'));
 
-        // TAMBAH GAMBAR BARU (TIDAK HAPUS YANG LAMA)
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('hotels', 'public');
+
+                $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/hotels'), $filename);
 
                 $hotel->images()->create([
-                    'path' => $path
+                    'path' => 'uploads/hotels/' . $filename
                 ]);
             }
         }
@@ -111,9 +94,13 @@ class AdminHotelController extends Controller
 
     public function destroy(Hotel $hotel)
     {
-        // HAPUS SEMUA GAMBAR
         foreach ($hotel->images as $img) {
-            Storage::disk('public')->delete($img->path);
+            $fullPath = public_path($img->path);
+
+            if (file_exists($fullPath)) {
+                unlink($fullPath);
+            }
+
             $img->delete();
         }
 
@@ -126,9 +113,7 @@ class AdminHotelController extends Controller
 
     public function show(Hotel $hotel)
     {
-        // ⬇️ SATU-SATUNYA PERUBAHAN DI SINI
         $hotel->load(['images', 'rooms.promos']);
-
         return view('admin.hotels.show', compact('hotel'));
     }
 }
