@@ -21,17 +21,15 @@
             </div>
 
             <a href="{{ route('admin.hotels.create') }}"
-   class="bg-blue-600 hover:bg-blue-700 transition text-white px-5 py-2 rounded-lg shadow">
-    + Tambah Hotel
-</a>
-
+               class="bg-blue-600 hover:bg-blue-700 transition text-white px-5 py-2 rounded-lg shadow">
+                + Tambah Hotel
+            </a>
         </div>
     </div>
 
     {{-- TABLE --}}
     <div class="max-w-7xl mx-auto px-6 pb-16">
         <div class="bg-white rounded-2xl shadow overflow-hidden">
-
             <table class="w-full text-sm text-left">
                 <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
                     <tr>
@@ -46,11 +44,10 @@
                 </thead>
 
                 <tbody class="divide-y">
-
                     @foreach($hotels as $hotel)
                         @php
                             $bintang = (int) ($hotel->stars ?? 0);
-                            $gambar  = $hotel->images->first();
+                            $gambar  = $hotel->images->first(); // ambil gambar pertama dari hotel_images
                         @endphp
 
                         <tr class="hover:bg-gray-50 transition">
@@ -86,8 +83,7 @@
                             <td class="px-6 py-5">
                                 <div class="flex flex-wrap gap-2">
                                     @foreach(explode(',', $hotel->fasilitas) as $f)
-                                        <span class="text-xs bg-orange-50 text-orange-600
-                                                     px-3 py-1 rounded-full">
+                                        <span class="text-xs bg-orange-50 text-orange-600 px-3 py-1 rounded-full">
                                             {{ trim($f) }}
                                         </span>
                                     @endforeach
@@ -97,8 +93,9 @@
                             {{-- GAMBAR --}}
                             <td class="px-6 py-5 text-center">
                                 @if($gambar)
-                                    <img src="{{ asset('storage/' . $gambar->path) }}"
-                                         class="w-14 h-14 object-cover rounded-lg shadow mx-auto">
+                                    <img src="{{ asset('images/' . $gambar->path) }}"
+                                         class="w-14 h-14 object-cover rounded-lg shadow mx-auto"
+                                         alt="{{ $hotel->nama_hotel }}">
                                 @else
                                     <div class="w-14 h-14 bg-gray-200 rounded-lg mx-auto"></div>
                                 @endif
@@ -107,8 +104,6 @@
                             {{-- AKSI --}}
                             <td class="px-6 py-5 text-center">
                                 <div class="flex justify-center gap-2">
-
-                                    {{-- EDIT --}}
                                     <a href="{{ route('admin.hotels.edit', $hotel->id) }}"
                                        class="px-4 py-1.5 rounded-lg text-sm
                                               bg-blue-100 text-blue-700
@@ -117,7 +112,6 @@
                                         Edit
                                     </a>
 
-                                    {{-- HAPUS --}}
                                     <button
                                         onclick="openDeleteModal({{ $hotel->id }})"
                                         class="px-4 py-1.5 rounded-lg text-sm
@@ -126,51 +120,39 @@
                                                transition shadow-sm">
                                         Hapus
                                     </button>
-
                                 </div>
                             </td>
+
                         </tr>
                     @endforeach
-
                 </tbody>
             </table>
-
         </div>
     </div>
 
     {{-- MODAL HAPUS --}}
-    <div id="deleteModal"
-         class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
-
+    <div id="deleteModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
         <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6">
-
             <h2 class="text-lg font-bold text-gray-800 mb-2">
                 ⚠️ Konfirmasi Hapus
             </h2>
-
             <p class="text-gray-600 text-sm mb-6">
                 Data hotel akan dihapus permanen dan tidak bisa dikembalikan.
             </p>
-
             <div class="flex justify-end gap-3">
                 <button onclick="closeDeleteModal()"
-                        class="px-4 py-2 rounded-lg bg-gray-100
-                               hover:bg-gray-200 transition">
+                        class="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition">
                     Batal
                 </button>
-
                 <form id="deleteForm" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit"
-                            class="px-4 py-2 rounded-lg
-                                   bg-red-600 text-white
-                                   hover:bg-red-700 transition">
+                            class="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition">
                         Ya, Hapus
                     </button>
                 </form>
             </div>
-
         </div>
     </div>
 

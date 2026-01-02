@@ -13,14 +13,20 @@ use App\Http\Controllers\User\BookmarkController;
 use App\Http\Controllers\User\UserTicketController;
 use App\Http\Controllers\User\OrderHistoryController;
 use App\Http\Controllers\ReviewController;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
-Route::get('/debug-storage', function () {
-    return [
-        'exists' => Storage::disk('public')->exists('hotels'),
-        'files'  => Storage::disk('public')->files('hotels'),
-    ];
+Route::get('/hotels', function () {
+    // Ambil semua file gambar di public/images
+    $images = File::files(public_path('images'));
+
+    // Convert ke URL agar bisa dipakai di Blade
+    $images = array_map(function ($file) {
+        return asset('images/' . $file->getFilename());
+    }, $images);
+
+    return view('hotels', compact('images'));
 });
+
 
 
 /*
