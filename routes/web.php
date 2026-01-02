@@ -13,6 +13,15 @@ use App\Http\Controllers\User\BookmarkController;
 use App\Http\Controllers\User\UserTicketController;
 use App\Http\Controllers\User\OrderHistoryController;
 use App\Http\Controllers\ReviewController;
+use Illuminate\Support\Facades\Storage;
+
+Route::get('/debug-storage', function () {
+    return [
+        'exists' => Storage::disk('public')->exists('hotels'),
+        'files'  => Storage::disk('public')->files('hotels'),
+    ];
+});
+
 
 /*
 |--------------------------------------------------------------------------
