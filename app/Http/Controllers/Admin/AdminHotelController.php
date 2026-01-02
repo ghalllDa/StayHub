@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\Storage;
 
 class AdminHotelController extends Controller
 {
@@ -34,19 +34,25 @@ class AdminHotelController extends Controller
             'images.*'   => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $hotel = Hotel::create($data);
+        // SIMPAN HOTEL (TANPA GAMBAR)
+        $hotel = Hotel::create([
+            'nama_hotel' => $data['nama_hotel'],
+            'lokasi'     => $data['lokasi'],
+            'deskripsi'  => $data['deskripsi'],
+            'latitude'   => $data['latitude'],
+            'longitude'  => $data['longitude'],
+            'harga'      => $data['harga'],
+            'fasilitas'  => $data['fasilitas'],
+            'stars'      => $data['stars'],
+        ]);
 
-        // ✅ UPLOAD KE CLOUDINARY (TANPA NGUBAH FITUR)
+        // SIMPAN MULTI IMAGE
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-
-                $upload = Cloudinary::upload(
-                    $image->getRealPath(),
-                    ['folder' => 'hotels']
-                );
+                $path = $image->store('hotels', 'public');
 
                 $hotel->images()->create([
-                    'path' => $upload->getSecurePath()
+                    'path' => $path
                 ]);
             }
         }
@@ -72,22 +78,28 @@ class AdminHotelController extends Controller
             'fasilitas'  => 'required|string',
             'latitude'   => 'required',
             'longitude'  => 'required',
-            'stars'      => 'required|integer|min:1|max:5',
             'images.*'   => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $hotel->update($request->except('images'));
+        // UPDATE DATA HOTEL
+        $hotel->update([
+            'nama_hotel' => $request->nama_hotel,
+            'lokasi'     => $request->lokasi,
+            'deskripsi'  => $request->deskripsi,
+            'harga'      => $request->harga,
+            'fasilitas'  => $request->fasilitas,
+            'latitude'   => $request->latitude,
+            'longitude'  => $request->longitude,
+            'stars'      => $request->stars,
+        ]);
 
+        // TAMBAH GAMBAR BARU (TIDAK HAPUS YANG LAMA)
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-
-                $upload = Cloudinary::upload(
-                    $image->getRealPath(),
-                    ['folder' => 'hotels']
-                );
+                $path = $image->store('hotels', 'public');
 
                 $hotel->images()->create([
-                    'path' => $upload->getSecurePath()
+                    'path' => $path
                 ]);
             }
         }
@@ -99,8 +111,10 @@ class AdminHotelController extends Controller
 
     public function destroy(Hotel $hotel)
     {
+        // HAPUS SEMUA GAMBAR
         foreach ($hotel->images as $img) {
-            $img->delete(); // Cloudinary biarin dulu (opsional)
+            Storage::disk('public')->delete($img->path);
+            $img->delete();
         }
 
         $hotel->delete();
@@ -112,7 +126,9 @@ class AdminHotelController extends Controller
 
     public function show(Hotel $hotel)
     {
+        // ⬇️ SATU-SATUNYA PERUBAHAN DI SINI
         $hotel->load(['images', 'rooms.promos']);
+
         return view('admin.hotels.show', compact('hotel'));
     }
 }
