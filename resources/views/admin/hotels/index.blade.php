@@ -93,16 +93,19 @@
                                     @endforeach
                                 </div>
                             </td>
+{{-- GAMBAR --}}
+<td class="px-6 py-5 text-center">
+    @if($gambar)
+        <img
+            src="{{ asset($gambar->path) }}"
+            class="w-14 h-14 object-cover rounded-lg shadow mx-auto"
+            alt="Hotel Image"
+        >
+    @else
+        <div class="w-14 h-14 bg-gray-200 rounded-lg mx-auto"></div>
+    @endif
+</td>
 
-                            {{-- GAMBAR --}}
-                            <td class="px-6 py-5 text-center">
-                                @if($gambar)
-                                    <img src="{{ asset($gambar->path) }}">
-                                         class="w-14 h-14 object-cover rounded-lg shadow mx-auto">
-                                @else
-                                    <div class="w-14 h-14 bg-gray-200 rounded-lg mx-auto"></div>
-                                @endif
-                            </td>
 
                             {{-- AKSI --}}
                             <td class="px-6 py-5 text-center">
