@@ -150,16 +150,10 @@
                 </p>
                 <ul class="space-y-2">
                     <li>
-                        <a href="{{ route('hotels.index') }}"
-                           class="menu-item {{ request()->routeIs('hotels.*') ? 'active-menu' : '' }}">
-                            🏨 Manajemen Hotel
-                        </a>
+                        
                     </li>
                     <li>
-                        <a href="{{ route('promo.index') }}"
-                           class="menu-item {{ request()->routeIs('promo.*') ? 'active-menu' : '' }}">
-                            💸 Promo Kamar
-                        </a>
+                        
                     </li>
                 </ul>
             </div>
