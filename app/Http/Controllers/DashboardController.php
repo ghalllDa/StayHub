@@ -18,7 +18,7 @@ class DashboardController extends Controller
         if ($role === 'user') {
 
             $hotels = Hotel::with([
-                    'images',
+                    //'images',
                     'rooms' => function ($q) {
                         $q->where('status', 'tersedia');
                     }
