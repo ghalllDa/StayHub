@@ -31,13 +31,10 @@
         }
     </style>
 
-    
-
     <div class="max-w-7xl mx-auto px-6 py-6">
 
-        {{-- WRAPPER AGAR BUTTON KE KANAN --}}
+        {{-- BUTTON KEMBALI --}}
         <div class="flex justify-end">
-            {{-- BUTTON KEMBALI --}}
             <a href="{{ route('dashboard') }}"
                class="inline-flex items-center gap-2 mb-6
                       px-5 py-2.5
@@ -59,12 +56,14 @@
         </div>
 
         {{-- BANNER HOTEL --}}
+        @php
+            $hotelBanner = $hotel->images->first() && file_exists(public_path('images/' . $hotel->images->first()->path))
+                           ? asset('images/' . $hotel->images->first()->path)
+                           : asset('images/no-image.png');
+        @endphp
+
         <div class="relative h-[320px] rounded-2xl overflow-hidden mb-8 lux-banner"
-             style="background-image: url('{{ optional($hotel->images->first())->path
-                ? asset('storage/' . $hotel->images->first()->path)
-                : asset('img/no-image.png') }}');
-                background-size: cover;
-                background-position: center;">
+             style="background-image: url('{{ $hotelBanner }}'); background-size: cover; background-position: center;">
 
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20"></div>
 
@@ -100,6 +99,11 @@
                         $hargaDiskon = $promo
                             ? $room->harga - ($room->harga * $promo->diskon / 100)
                             : null;
+
+                        // IMAGE KAMAR
+                        $roomImage = $room->gambar && file_exists(public_path('images/' . $room->gambar))
+                                     ? asset('images/' . $room->gambar)
+                                     : asset('images/no-image.png');
                     @endphp
 
                     <div class="bg-white rounded-xl shadow p-4 relative lux-card">
@@ -115,10 +119,9 @@
                         @endif
 
                         {{-- FOTO KAMAR --}}
-                        @if($room->gambar)
-                            <img src="{{ asset('storage/' . $room->gambar) }}"
-                                 class="w-full h-40 object-cover rounded-lg mb-3">
-                        @endif
+                        <img src="{{ $roomImage }}"
+                             class="w-full h-40 object-cover rounded-lg mb-3"
+                             alt="{{ $room->nama_kamar }}">
 
                         <h4 class="font-semibold text-lg">{{ $room->nama_kamar }}</h4>
 
@@ -180,7 +183,7 @@
                     </div>
                 @endforeach
 
-                {{-- MODAL HAPUS (ASLI, TIDAK DIUBAH) --}}
+                {{-- MODAL HAPUS --}}
                 <div x-show="open" x-cloak
                      class="fixed inset-0 z-50 flex items-center justify-center">
 
