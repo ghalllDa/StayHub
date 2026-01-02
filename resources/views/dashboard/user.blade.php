@@ -278,10 +278,12 @@
                     list.innerHTML += `
                         <div class="bg-white/90 backdrop-blur rounded-2xl shadow-lg overflow-hidden">
 
-                            <img src="${hotel.images?.[0]?.path
-                                ? '/storage/' + hotel.images[0].path
-                                : '/img/no-image.png'}"
-                                 class="w-full h-44 object-cover">
+                            <img src="${
+    hotel.images?.length > 0
+        ? '/images/' + hotel.images[0].path
+        : '/img/no-image.png'
+}" class="w-full h-44 object-cover" alt="${hotel.nama_hotel}">
+
 
                             <div class="p-5">
 
