@@ -96,6 +96,6 @@ class HotelController extends Controller
 
 
 
-        return view('user.hotels.show', compact('hotel'));
+        return view('penginapan.show', compact('hotel'));
     }
 }
