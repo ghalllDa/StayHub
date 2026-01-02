@@ -18,6 +18,7 @@ class DashboardController extends Controller
         if ($role === 'user') {
 
             $hotels = Hotel::with([
+                    'images',
                     'rooms' => function ($q) {
                         $q->where('status', 'tersedia');
                     }
@@ -27,6 +28,7 @@ class DashboardController extends Controller
                 })
                 ->get();
 
+            // ✅ FIX DI SINI (BUKAN bookmarks())
             $bookmarkedHotelIds = $user
                 ->savedHotels()
                 ->pluck('hotels.id')
@@ -37,6 +39,7 @@ class DashboardController extends Controller
                 'bookmarkedHotelIds'
             ));
         }
+
         // ===============================
         // ADMIN
         // ===============================

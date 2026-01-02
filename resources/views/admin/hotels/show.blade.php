@@ -77,7 +77,7 @@
 
                 <p class="mb-4 text-sm opacity-90">{{ $hotel->lokasi }}</p>
 
-                <a href="{{ route('hotels.rooms.create', $hotel->id) }}"
+                <a href="{{ route('admin.hotels.rooms.create', $hotel->id) }}"
                    class="inline-flex items-center gap-2
                           lux-btn
                           px-5 py-2 rounded-xl
@@ -161,7 +161,7 @@
                         {{-- TOMBOL --}}
                         <div class="flex gap-2 mt-4">
 
-                            <a href="{{ route('hotels.rooms.edit', [$hotel->id, $room->id]) }}"
+                            <a href="{{ route('admin.hotels.rooms.edit', [$hotel->id, $room->id]) }}"
                                class="flex-1 text-center px-3 py-2
                                       bg-yellow-500 hover:bg-yellow-600
                                       text-white text-sm rounded-lg">
@@ -169,7 +169,7 @@
                             </a>
 
                             <button @click="open = true;
-                                            action = '{{ route('hotels.rooms.destroy', [$hotel->id, $room->id]) }}'"
+                                            action = '{{ route('admin.hotels.rooms.destroy', [$hotel->id, $room->id]) }}'"
                                     class="flex-1 px-3 py-2
                                            bg-red-600 hover:bg-red-700
                                            text-white text-sm rounded-lg">
