@@ -155,9 +155,7 @@ Route::middleware(['auth', 'role:admin_operasional'])
 | Hotel Search (User)
 |--------------------------------------------------------------------------
 */
-Route::get('/hotels', function () {
-    return view('penginapan.index');
-})->name('user.hotels.index');
+
 
 Route::get('/hotels-nearby', [HotelController::class, 'nearby']);
 
