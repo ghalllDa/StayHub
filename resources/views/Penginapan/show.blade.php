@@ -175,6 +175,9 @@ penginapan /show .blade.php
             $hargaDiskon = $promo
                 ? $room->harga - ($room->harga * $promo->diskon / 100)
                 : null;
+            $roomImg = $room->gambar && file_exists(public_path('images/' . $room->gambar))
+                                               ? asset('images/' . $room->gambar)
+                                               : asset('images/no-image.png');
         @endphp
 
         <div class="relative border rounded-2xl p-5
