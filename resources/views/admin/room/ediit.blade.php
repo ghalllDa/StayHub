@@ -93,7 +93,7 @@
             <div class="lux-body">
 
                 <form method="POST"
-                      action="{{ route('hotels.rooms.update', [$hotel->id, $room->id]) }}">
+                      action="{{ route('admin.hotels.rooms.update', [$hotel->id, $room->id]) }}">
                     @csrf
                     @method('PUT')
 
