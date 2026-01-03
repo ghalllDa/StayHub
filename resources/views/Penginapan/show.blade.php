@@ -1,9 +1,3 @@
-penginapan /show .blade.php 
-
-
-
-
-
 <x-app-layout>
 
 <!-- ================= MAIN CONTENT ================= -->
