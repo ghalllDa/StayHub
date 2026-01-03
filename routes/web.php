@@ -90,8 +90,13 @@ Route::middleware(['auth'])->group(function () {
     /*
     | REVIEW
     */
-    Route::get('/reviews/{order}/create', [ReviewController::class, 'create'])
+    Route::get('/reviews/{booking}/create', [ReviewController::class, 'create'])
+        ->middleware('auth')
         ->name('reviews.create');
+
+    Route::post('/reviews/{booking}', [ReviewController::class, 'store'])
+        ->middleware('auth')
+        ->name('reviews.store');
 
 });
 
@@ -107,24 +112,24 @@ Route::middleware(['auth', 'role:admin_operasional'])
         // Resource dengan nama unik untuk admin
         Route::resource('hotels', AdminHotelController::class, [
             'names' => [
-                'index'   => 'admin.hotels.index',
-                'create'  => 'admin.hotels.create',
-                'store'   => 'admin.hotels.store',
-                'show'    => 'admin.hotels.show',
-                'edit'    => 'admin.hotels.edit',
-                'update'  => 'admin.hotels.update',
+                'index' => 'admin.hotels.index',
+                'create' => 'admin.hotels.create',
+                'store' => 'admin.hotels.store',
+                'show' => 'admin.hotels.show',
+                'edit' => 'admin.hotels.edit',
+                'update' => 'admin.hotels.update',
                 'destroy' => 'admin.hotels.destroy',
             ]
         ]);
 
         Route::resource('hotels.rooms', RoomController::class, [
             'names' => [
-                'index'   => 'admin.hotels.rooms.index',
-                'create'  => 'admin.hotels.rooms.create',
-                'store'   => 'admin.hotels.rooms.store',
-                'show'    => 'admin.hotels.rooms.show',
-                'edit'    => 'admin.hotels.rooms.edit',
-                'update'  => 'admin.hotels.rooms.update',
+                'index' => 'admin.hotels.rooms.index',
+                'create' => 'admin.hotels.rooms.create',
+                'store' => 'admin.hotels.rooms.store',
+                'show' => 'admin.hotels.rooms.show',
+                'edit' => 'admin.hotels.rooms.edit',
+                'update' => 'admin.hotels.rooms.update',
                 'destroy' => 'admin.hotels.rooms.destroy',
             ]
         ]);
