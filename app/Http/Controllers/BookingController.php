@@ -10,7 +10,7 @@ use Midtrans\Snap;
 use Midtrans\Config;
 use Illuminate\Support\Facades\Auth;
 use Midtrans\Notification;
-
+use Midtrans\Transaction;
 
 class BookingController extends Controller
 {
@@ -177,29 +177,45 @@ class BookingController extends Controller
 
     public function paymentSuccess(Request $request)
     {
-        // Ambil order_id dari URL query parameter yang dikirim Midtrans
         $orderId = $request->query('order_id');
 
         if (!$orderId) {
             abort(404, 'Kode transaksi tidak ditemukan.');
         }
 
-        // Cari booking berdasarkan transaction_id
         $booking = Booking::with('room')->where('transaction_id', $orderId)->first();
 
         if (!$booking) {
             abort(404, 'Booking tidak ditemukan.');
         }
 
-        // ✅ DEV MODE ONLY (localhost)
-        if (app()->environment('local') && $booking->status !== 'paid') {
-            $booking->update([
-                'status' => 'paid'
-            ]);
-        }
+        // ===== KONFIGURASI MIDTRANS =====
+        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        Config::$isProduction = env('MIDTRANS_IS_PRODUCTION', false);
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
 
-        // Opsional: cek apakah status sudah paid (dari webhook)
-        // Tapi karena Midtrans redirect ke sini saat status_code=200 & settlement, biasanya sudah paid
+        try {
+            // Ambil status transaksi langsung dari Midtrans
+            $status = Transaction::status($orderId);
+
+            // Jika sudah dibayar / settlement / capture
+            if (in_array($status->transaction_status, ['settlement', 'capture'])) {
+                if ($status->fraud_status == 'accept') {
+                    $booking->update(['status' => 'paid']);
+                } elseif ($status->fraud_status == 'challenge') {
+                    $booking->update(['status' => 'challenge']);
+                }
+            } elseif (in_array($status->transaction_status, ['cancel', 'deny', 'expire'])) {
+                $booking->update(['status' => 'canceled']);
+            } elseif ($status->transaction_status == 'pending') {
+                $booking->update(['status' => 'pending']);
+            }
+
+        } catch (\Exception $e) {
+            // Kalau gagal cek status, log error tapi jangan block user
+            \Log::error('Midtrans Status Check Error: ' . $e->getMessage());
+        }
 
         return view('booking.success', compact('booking'));
     }
