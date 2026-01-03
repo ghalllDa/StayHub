@@ -26,18 +26,25 @@ class AdminBookingController extends Controller
 
         // ===== KODE LAMA (TIDAK DIUBAH) =====
         $booking->update([
-            'status'      => 'approved',
-            'ticket_code' => 'TICKET-' . strtoupper(Str::random(8)),
-            'approved_at' => now(),
+            'status' => 'approved'
         ]);
+
+        Ticket::updateOrCreate(
+            ['booking_id' => $booking->id],
+            [
+                'ticket_code' => 'TICKET-' . strtoupper(Str::random(8)),
+                'check_in' => $booking->check_in,
+                'check_out' => $booking->check_out,
+            ]
+        );
 
         // ===== FIX FINAL (PASTI MASUK DB) =====
         Ticket::updateOrCreate(
             ['booking_id' => $booking->id],
             [
                 'ticket_code' => $booking->ticket_code,
-                'check_in'    => $booking->check_in,
-                'check_out'   => $booking->check_out,
+                'check_in' => $booking->check_in,
+                'check_out' => $booking->check_out,
             ]
         );
 
