@@ -86,25 +86,19 @@
 
                                     <td class="px-6 py-4 text-center">
                                         @if($booking->status === 'paid')
-                                            <div class="flex justify-center gap-2">
-                                                <form method="POST"
-                                                      action="{{ route('admin.bookings.approve', $booking->id) }}">
-                                                    @csrf
-                                                    <button
-                                                        class="px-4 py-1.5 text-xs font-semibold bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
-                                                        Terima
-                                                    </button>
-                                                </form>
+    <div class="flex justify-center gap-2">
+        {{-- Approve --}}
+        <form method="POST"
+              action="{{ route('admin.bookings.approve', $booking->id) }}">
+            @csrf
+            <button type="submit"
+                    class="px-4 py-1.5 text-xs font-semibold bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                Terima
+            </button>
+        </form>
+    </div>
+@endif
 
-                                                <form method="POST"
-                                                      action="{{ route('admin.bookings.reject', $booking->id) }}">
-                                                    @csrf
-                                                   
-                                                </form>
-                                            </div>
-                                        @else
-                                            <span class="text-gray-400">—</span>
-                                        @endif
                                     </td>
                                 </tr>
                             @empty
