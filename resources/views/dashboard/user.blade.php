@@ -222,7 +222,6 @@
 
             function renderHotels(data) {
                 list.innerHTML = '';
-                renderMarkers(data);
 
                 if (!data.length) {
                     list.innerHTML =
