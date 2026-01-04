@@ -24,27 +24,18 @@ class AdminBookingController extends Controller
             return back()->withErrors('Booking belum dibayar');
         }
 
-        // ===== KODE LAMA (TIDAK DIUBAH) =====
+        // update status booking (FITUR LAMA - TETAP)
         $booking->update([
             'status' => 'approved'
         ]);
 
+        // 🔥 FIX UTAMA: BUAT / UPDATE TIKET SEKALI SAJA
         Ticket::updateOrCreate(
             ['booking_id' => $booking->id],
             [
                 'ticket_code' => 'TICKET-' . strtoupper(Str::random(8)),
-                'check_in' => $booking->check_in,
-                'check_out' => $booking->check_out,
-            ]
-        );
-
-        // ===== FIX FINAL (PASTI MASUK DB) =====
-        Ticket::updateOrCreate(
-            ['booking_id' => $booking->id],
-            [
-                'ticket_code' => $booking->ticket_code,
-                'check_in' => $booking->check_in,
-                'check_out' => $booking->check_out,
+                'check_in'    => $booking->check_in,
+                'check_out'   => $booking->check_out,
             ]
         );
 
