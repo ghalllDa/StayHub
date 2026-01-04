@@ -11,17 +11,14 @@
                     p-8">
 
             <h1 class="text-3xl font-extrabold text-blue-700 mb-6 tracking-wide">
-                Penginapan Hotelku
+                Penginapan StayHub
             </h1>
 
             <!-- HERO -->
             <div class="relative rounded-3xl overflow-hidden mb-10">
 
-                <img
-                    src="https://images.unsplash.com/photo-1566073771259-6a8506099945"
-                    class="absolute inset-0 w-full h-full object-cover"
-                    alt="Hotel Hero"
-                >
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945"
+                    class="absolute inset-0 w-full h-full object-cover" alt="Hotel Hero">
 
                 <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-700/60"></div>
 
@@ -40,30 +37,20 @@
                                 grid grid-cols-1 md:grid-cols-5 gap-3">
 
                         <input type="text" id="keyword" placeholder="Kota / Hotel"
-                               class="border rounded-xl px-3 py-2 col-span-2">
+                            class="border rounded-xl px-3 py-2 col-span-2">
 
-                        <input type="date"
-                               class="border rounded-xl px-3 py-2">
+                        <input type="date" class="border rounded-xl px-3 py-2">
 
-                        <input type="date"
-                               class="border rounded-xl px-3 py-2">
+                        <input type="date" class="border rounded-xl px-3 py-2">
 
-                        <input type="number" placeholder="Tamu"
-                               class="border rounded-xl px-3 py-2">
+                        <input type="number" placeholder="Tamu" class="border rounded-xl px-3 py-2">
 
-                        <button id="btnCari"
-                                class="bg-orange-500 hover:bg-orange-600
+                        <button id="btnCari" class="bg-orange-500 hover:bg-orange-600
                                        text-white rounded-xl px-4 py-2 font-semibold">
                             Cari
                         </button>
                     </div>
                 </div>
-            </div>
-
-            <!-- MAP -->
-            <div class="mb-10">
-                <div id="map"
-                     class="w-full h-96 rounded-3xl shadow-lg border border-white/50"></div>
             </div>
 
             <!-- LIST -->
@@ -72,71 +59,70 @@
                     Hasil Pencarian Hotel
                 </h2>
 
-                <div id="hotel-list"
-                     class="grid grid-cols-1 md:grid-cols-4 gap-8"></div>
+                <div id="hotel-list" class="grid grid-cols-1 md:grid-cols-4 gap-8"></div>
             </div>
         </div>
     </div>
 
-    
-        <!-- ================= VALUE SECTION ================= -->
-<section class="bg-white py-20 mt-24">
-    <div class="max-w-7xl mx-auto px-6">
 
-        <div class="text-center mb-14">
-            <h2 class="text-3xl font-bold text-blue-700 mb-3">
-                Kenapa Memilih HotelHub?
-            </h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">
-                Kami hadir untuk memberikan pengalaman booking hotel
-                yang lebih mudah, aman, dan nyaman untuk semua orang.
-            </p>
+    <!-- ================= VALUE SECTION ================= -->
+    <section class="bg-white py-20 mt-24">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="text-center mb-14">
+                <h2 class="text-3xl font-bold text-blue-700 mb-3">
+                    Kenapa Memilih StayHub?
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Kami hadir untuk memberikan pengalaman booking hotel
+                    yang lebih mudah, aman, dan nyaman untuk semua orang.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+                <!-- ITEM 1 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8
+                        hover:shadow-xl transition text-center">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h4 class="font-semibold text-lg mb-2">
+                        Proses Cepat
+                    </h4>
+                    <p class="text-gray-600 text-sm">
+                        Booking hotel hanya dalam beberapa langkah
+                        tanpa proses yang rumit.
+                    </p>
+                </div>
+
+                <!-- ITEM 2 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8
+                        hover:shadow-xl transition text-center">
+                    <div class="text-4xl mb-4">🔒</div>
+                    <h4 class="font-semibold text-lg mb-2">
+                        Aman & Terpercaya
+                    </h4>
+                    <p class="text-gray-600 text-sm">
+                        Data dan transaksi kamu dilindungi
+                        dengan sistem keamanan terbaik.
+                    </p>
+                </div>
+
+                <!-- ITEM 3 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8
+                        hover:shadow-xl transition text-center">
+                    <div class="text-4xl mb-4">🏨</div>
+                    <h4 class="font-semibold text-lg mb-2">
+                        Pilihan Lengkap
+                    </h4>
+                    <p class="text-gray-600 text-sm">
+                        Ribuan hotel dan penginapan di seluruh
+                        Indonesia tersedia untuk kamu.
+                    </p>
+                </div>
+
+            </div>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-            <!-- ITEM 1 -->
-            <div class="bg-white rounded-2xl shadow-lg p-8
-                        hover:shadow-xl transition text-center">
-                <div class="text-4xl mb-4">⚡</div>
-                <h4 class="font-semibold text-lg mb-2">
-                    Proses Cepat
-                </h4>
-                <p class="text-gray-600 text-sm">
-                    Booking hotel hanya dalam beberapa langkah
-                    tanpa proses yang rumit.
-                </p>
-            </div>
-
-            <!-- ITEM 2 -->
-            <div class="bg-white rounded-2xl shadow-lg p-8
-                        hover:shadow-xl transition text-center">
-                <div class="text-4xl mb-4">🔒</div>
-                <h4 class="font-semibold text-lg mb-2">
-                    Aman & Terpercaya
-                </h4>
-                <p class="text-gray-600 text-sm">
-                    Data dan transaksi kamu dilindungi
-                    dengan sistem keamanan terbaik.
-                </p>
-            </div>
-
-            <!-- ITEM 3 -->
-            <div class="bg-white rounded-2xl shadow-lg p-8
-                        hover:shadow-xl transition text-center">
-                <div class="text-4xl mb-4">🏨</div>
-                <h4 class="font-semibold text-lg mb-2">
-                    Pilihan Lengkap
-                </h4>
-                <p class="text-gray-600 text-sm">
-                    Ribuan hotel dan penginapan di seluruh
-                    Indonesia tersedia untuk kamu.
-                </p>
-            </div>
-
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- ================= FOOTER ================= -->
     <footer class="bg-white border-t mt-24">
@@ -146,11 +132,11 @@
             <!-- LEFT -->
             <div>
                 <h2 class="text-2xl font-bold text-blue-700 mb-4">
-                    HotelHub
+                    StaylHub
                 </h2>
 
                 <p class="leading-relaxed">
-                    HotelHub adalah platform booking hotel yang membantu kamu
+                    StayHub adalah platform booking hotel yang membantu kamu
                     menemukan penginapan terbaik dengan proses cepat, aman,
                     dan nyaman di seluruh Indonesia.
                 </p>
@@ -191,7 +177,7 @@
                 </h4>
 
                 <div class="space-y-3">
-                    <p>📧 support@hotelhub.id</p>
+                    <p>📧 support@stayhub.id</p>
                     <p>📞 +62 587-6655-4420</p>
                     <p>📍 Bandung, Indonesia</p>
                 </div>
@@ -206,7 +192,7 @@
                         justify-between items-center
                         text-sm text-gray-500">
 
-                <p>© 2026 HotelHub. All rights reserved.</p>
+                <p>© 2026 StayHub. All rights reserved.</p>
 
                 <div class="flex gap-6 mt-3 md:mt-0">
                     <a href="#" class="hover:text-blue-600 transition">
@@ -229,34 +215,8 @@
         window.bookmarkedHotelIds = @json($bookmarkedHotelIds);
     </script>
 
-    {{-- LEAFLET (TIDAK DIUBAH) --}}
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-
-            const map = L.map('map').setView([-6.2, 106.816666], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
-
-            let markers = [];
-
-            function renderMarkers(hotels) {
-                markers.forEach(m => map.removeLayer(m));
-                markers = [];
-
-                hotels.forEach(hotel => {
-                    if (hotel.latitude && hotel.longitude) {
-                        markers.push(
-                            L.marker([hotel.latitude, hotel.longitude])
-                                .addTo(map)
-                                .bindPopup(`<strong>${hotel.nama_hotel}</strong><br>${hotel.lokasi}`)
-                        );
-                    }
-                });
-            }
 
             const list = document.getElementById('hotel-list');
 
@@ -278,34 +238,32 @@
                     list.innerHTML += `
                         <div class="bg-white/90 backdrop-blur rounded-2xl shadow-lg overflow-hidden">
 
-                            <img src="${
-    hotel.images?.length > 0
-        ? '/images/' + hotel.images[0].path
-        : '/img/no-image.png'
-}" class="w-full h-44 object-cover" alt="${hotel.nama_hotel}">
+                            <img src="${hotel.images?.length > 0
+                            ? '/images/' + hotel.images[0].path
+                            : '/img/no-image.png'
+                        }" class="w-full h-44 object-cover" alt="${hotel.nama_hotel}">
 
 
                             <div class="p-5">
 
-                                <!-- NAMA + BINTANG + BOOKMARK -->
-<div class="mb-2 flex justify-between items-start">
+                        <!-- NAMA + BINTANG + BOOKMARK -->
+                            <div class="mb-2 flex justify-between items-start">
 
-    <!-- KIRI: NAMA + BINTANG + LOKASI -->
-    <div>
-        <div class="flex items-center gap-2">
-            <h3 class="font-bold text-lg text-gray-800">
-                ${hotel.nama_hotel}
-            </h3>
+                        <!-- KIRI: NAMA + BINTANG + LOKASI -->
+                            <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="font-bold text-lg text-gray-800">
+                                ${hotel.nama_hotel}
+                                </h3>
 
-            <!-- BINTANG HOTEL -->
-            ${
-                Number(hotel.stars) > 0
-                    ? `<div class="flex text-yellow-400 text-sm leading-none">
+                        <!-- BINTANG HOTEL -->
+                            ${Number(hotel.stars) > 0
+                            ? `<div class="flex text-yellow-400 text-sm leading-none">
                             ${'★'.repeat(Number(hotel.stars))}
-                       </div>`
-                    : ''
-            }
-        </div>
+                            </div>`
+                            : ''
+                        }
+                 </div>
 
         <!-- LOKASI -->
         <p class="text-sm text-gray-500">
@@ -346,12 +304,18 @@
             renderHotels(window.initialHotels);
 
             document.getElementById('btnCari').addEventListener('click', function () {
-                const keyword = document.getElementById('keyword').value.toLowerCase();
+                const keyword = document
+                    .getElementById('keyword')
+                    .value
+                    .trim()
+                    .toLowerCase();
 
-                const filtered = window.initialHotels.filter(hotel =>
-                    hotel.nama_hotel.toLowerCase().includes(keyword) ||
-                    hotel.lokasi.toLowerCase().includes(keyword)
-                );
+                const filtered = window.initialHotels.filter(hotel => {
+                    const nama = (hotel.nama_hotel || '').toLowerCase();
+                    const lokasi = (hotel.lokasi || '').toLowerCase();
+
+                    return nama.includes(keyword) || lokasi.includes(keyword);
+                });
 
                 renderHotels(filtered);
             });
@@ -371,17 +335,17 @@
                         'Accept': 'application/json'
                     }
                 })
-                .then(res => res.json())
-                .then(() => {
-                    btn.classList.toggle('saved');
+                    .then(res => res.json())
+                    .then(() => {
+                        btn.classList.toggle('saved');
 
-                    if (btn.classList.contains('saved')) {
-                        window.bookmarkedHotelIds.push(parseInt(hotelId));
-                    } else {
-                        window.bookmarkedHotelIds =
-                            window.bookmarkedHotelIds.filter(id => id !== parseInt(hotelId));
-                    }
-                });
+                        if (btn.classList.contains('saved')) {
+                            window.bookmarkedHotelIds.push(parseInt(hotelId));
+                        } else {
+                            window.bookmarkedHotelIds =
+                                window.bookmarkedHotelIds.filter(id => id !== parseInt(hotelId));
+                        }
+                    });
             });
 
         });
@@ -396,9 +360,11 @@
             border: 1px solid #e5e7eb;
             cursor: pointer;
         }
+
         .bookmark-btn svg {
             color: #9ca3af;
         }
+
         .bookmark-btn.saved svg {
             color: #ef4444;
         }
