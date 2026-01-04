@@ -30,7 +30,15 @@ class ReviewController extends Controller
 
     public function store(Request $request, Booking $booking)
     {
+        // hanya pemilik booking
         abort_if($booking->user_id !== auth()->id(), 403);
+
+        // 🔥 CEGAH DOUBLE REVIEW (WAJIB ADA DI STORE)
+        if ($booking->review) {
+            return redirect()
+                ->route('user.order-history')
+                ->with('error', 'Booking ini sudah direview');
+        }
 
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
@@ -38,11 +46,11 @@ class ReviewController extends Controller
         ]);
 
         Review::create([
-            'hotel_id' => $booking->room->hotel_id, // ✅ BENAR
+            'hotel_id'   => $booking->room->hotel_id, // ✅ benar
             'booking_id' => $booking->id,
-            'user_id' => auth()->id(),
-            'rating' => $request->rating,
-            'comment' => $request->comment,
+            'user_id'    => auth()->id(),
+            'rating'     => $request->rating,
+            'comment'    => $request->comment,
         ]);
 
         return redirect()
