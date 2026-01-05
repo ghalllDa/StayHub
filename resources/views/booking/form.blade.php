@@ -185,9 +185,6 @@
                                     Indonesia tersedia untuk kamu.
                                 </p>
                             </div>
-
-                        </div>
-                    
                 </section>
 
                 <!-- ================= FOOTER ================= -->
