@@ -129,7 +129,7 @@
                         Rp {{ number_format($room->harga, 0, ',', '.') }}
                     </p>
                 </div>
-            </div> <!-- END GRID -->
+             <!-- END GRID -->
 
                 <!-- ================= VALUE SECTION ================= -->
                 <section class="bg-white py-20 mt-24">
