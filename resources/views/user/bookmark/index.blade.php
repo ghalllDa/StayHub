@@ -19,10 +19,10 @@
                         <div class="bg-white rounded-lg shadow hotel-card" data-id="{{ $hotel->id }}">
 
                             <img
-                                src="{{ $hotel->images->first()
-                                    ? asset('storage/' . $hotel->images->first()->path)
-                                    : asset('img/no-image.png') }}"
-                                class="w-full h-40 object-cover rounded-t-lg">
+                                src="${hotel.images?.length > 0
+                                ? '/images/' + hotel.images[0].path
+                                : '/img/no-image.png'
+                            }" class="w-full h-44 object-cover" alt="${hotel.nama_hotel}">
 
                             <div class="p-4">
 
