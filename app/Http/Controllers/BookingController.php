@@ -67,12 +67,16 @@ class BookingController extends Controller
 
         // Cek overlapping (sama seperti sebelumnya)
         $overlapping = Booking::where('room_id', $room->id)
-            ->whereIn('status', ['pending', 'paid'])
+            ->where(function ($query) {
+                $query->where('status', 'paid')
+                    ->orWhere(function ($q) {
+                        $q->where('status', 'pending')
+                            ->where('created_at', '>=', now()->subMinutes(15));
+                    });
+            })
             ->where(function ($query) use ($checkIn, $checkOut) {
-                $query->where(function ($q) use ($checkIn, $checkOut) {
-                    $q->where('check_in', '<', $checkOut)
-                        ->where('check_out', '>', $checkIn);
-                });
+                $query->where('check_in', '<', $checkOut)
+                    ->where('check_out', '>', $checkIn);
             })
             ->exists();
 
